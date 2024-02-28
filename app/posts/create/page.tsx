@@ -22,7 +22,7 @@ function CreatePostForm() {
   const mutation = useMutation({
     mutationFn: async (data: { title: string; content: string }) => {
       const response = await axios.post(
-        "http://localhost:5000/post/create/",
+        `${process.env.NEXT_PUBLIC_API_URL}/post/create/`,
         {
           title: data.title,
           content: data.content,

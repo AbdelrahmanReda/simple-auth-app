@@ -5,15 +5,20 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import FRow from "@/components/FRow";
+import FSpinner from "@/components/FSpinner";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("123456");
   const { push } = useRouter();
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const response = fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login/`, {
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,11 +29,19 @@ const Page = () => {
         }),
         credentials: "include",
       });
-      const data = await (await response).json();
+    },
+    onSuccess: () => {
+      toast.success("Logged in successfully");
       push("/posts");
-    } catch (error) {
-      console.error("An error occurred: ", error);
-    }
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutation.mutate();
   };
 
   return (
@@ -53,9 +66,15 @@ const Page = () => {
           />
         </div>
         <Button type="submit" className="w-full">
-          Sign in
+          <FRow>
+            <FSpinner isVisible={mutation.isPending} />
+            Sign in
+          </FRow>
         </Button>
-        <Link href={"http://localhost:5000/auth/google"}>
+        {mutation.isError && (
+          <div className="text-red-500 text-sm">{mutation.error.message}</div>
+        )}
+        <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
           <Button variant={"secondary"} className="w-full">
             <img
               src={

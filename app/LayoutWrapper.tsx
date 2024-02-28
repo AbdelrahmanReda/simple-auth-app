@@ -52,7 +52,7 @@ export default function LayoutWrapper({
             <div className={"flex gap-1"}>
               <Avatar>
                 <AvatarImage
-                  src={`http://localhost:5000/${data?.user?.picture}`}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.user?.picture}`}
                 />
                 <AvatarFallback> A U </AvatarFallback>
               </Avatar>

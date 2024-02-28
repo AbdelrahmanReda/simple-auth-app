@@ -13,16 +13,19 @@ const Page = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = fetch("http://localhost:5000/auth/register/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/register/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      );
       const data = await (await response).json();
       push("/posts");
     } catch (error) {
@@ -54,7 +57,7 @@ const Page = () => {
         <Button type="submit" className="w-full">
           Register
         </Button>
-        <Link href={"http://localhost:5000/auth/google"}>
+        <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
           <Button variant={"secondary"} className="w-full">
             <img
               src={

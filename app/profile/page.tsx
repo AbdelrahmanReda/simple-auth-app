@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const getAuth = async () => {
   const response = await axios.get(
-    "http://localhost:5000/get-user/",
+    `${process.env.NEXT_PUBLIC_API_URL}/get-user/`,
 
     {
       headers: {
@@ -58,7 +58,7 @@ const Page: React.FC = async () => {
           ) : (
             <div className={"flex gap-1"}>
               <img
-                src={`http://localhost:5000/${data?.user?.picture}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.user?.picture}`}
                 alt={data?.user?.name}
                 className="rounded-full h-10 w-10"
               />

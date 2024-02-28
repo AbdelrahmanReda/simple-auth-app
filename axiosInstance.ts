@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 const axiosInstance: AxiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
+    credentials: "include",
   },
 });
 

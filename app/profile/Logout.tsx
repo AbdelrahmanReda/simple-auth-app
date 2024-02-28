@@ -13,7 +13,7 @@ const Logout = () => {
     e.preventDefault();
 
     axios
-      .get("http://localhost:5000/logout/", {
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/logout/`, {
         headers: {
           "Content-Type": "application/json",
           cookie: `connect.sid=${cookies.get("connect.sid")}`,
