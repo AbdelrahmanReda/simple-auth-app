@@ -2,13 +2,27 @@ import axiosInstance from "@/axiosInstance";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { columns, DataTable } from "@/components/data-table";
+import { cookies } from "next/headers";
 
 const fetchPosts = async () => {
-  const response = await axiosInstance.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/posts`,
-  );
-  const data = await response.data;
-  return { data };
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+      headers: {
+        "Content-Type": "application/json",
+        cookie: `connect.sid=${cookies().get("connect.sid")?.value}`,
+      },
+      credentials: "include",
+    });
+    return {
+      data: await response.json(),
+    };
+  } catch (error) {
+    return {
+      data: {
+        posts: [],
+      },
+    };
+  }
 };
 
 interface Post {
