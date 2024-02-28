@@ -24,9 +24,18 @@ const getAuth = async () => {
 
 const Page: React.FC = async () => {
   const cookieValue = cookies().get("myCustomCookie")?.value;
-  console.log("cookieValue ", cookieValue);
-  let data = {};
-  data.user = JSON.parse(decodeURIComponent(cookieValue));
+  let data = {
+    user: {
+      provider: "google",
+      picture:
+        "https://lh3.googleusercontent.com/a-/AOh14Gjv3W3k3jxw8xZgP3m8OvUwz1t8W6wZ3tXyZ9j7",
+      given_name: "John",
+      email: "",
+      name: "John Doe",
+    },
+  };
+
+  data.user = JSON.parse(decodeURIComponent(cookieValue || ""));
 
   return (
     <>

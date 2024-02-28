@@ -12,9 +12,20 @@ export default function LayoutWrapper({
 }) {
   const cookieValue = cookies().get("myCustomCookie")?.value;
   console.log("cookieValue ", cookieValue);
-  let data = {};
+
+  let data = {
+    user: {
+      provider: "google",
+      picture:
+        "https://lh3.googleusercontent.com/a-/AOh14Gjv3W3k3jxw8xZgP3m8OvUwz1t8W6wZ3tXyZ9j7",
+      given_name: "John",
+      email: "",
+      name: "John Doe",
+    },
+  };
+
   if (cookieValue) {
-    data.user = JSON.parse(decodeURIComponent(cookieValue));
+    data.user = JSON.parse(decodeURIComponent(cookieValue || ""));
   }
 
   if (!cookieValue) {
