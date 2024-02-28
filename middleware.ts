@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export default function middleware(req: NextRequest) {
   const cokie = req.cookies.get("connect.sid");
-  console.log(cokie?.value);
   const isAuth = cokie?.value ? true : false;
   const path = req.nextUrl.pathname;
 

@@ -11,7 +11,6 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }) {
   const cookieValue = cookies().get("myCustomCookie")?.value;
-  console.log("cookieValue ", cookieValue);
 
   let data = {
     user: {

@@ -24,7 +24,6 @@ const Page = () => {
         }),
       });
       const data = await (await response).json();
-      console.log(data);
       push("/posts");
     } catch (error) {
       console.error("An error occurred: ", error);
