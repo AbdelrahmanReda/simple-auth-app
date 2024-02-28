@@ -4,7 +4,9 @@ import Link from "next/link";
 import { columns, DataTable } from "@/components/data-table";
 
 const fetchPosts = async () => {
-  const response = await axiosInstance.get("http://localhost:5000/posts");
+  const response = await axiosInstance.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/posts`,
+  );
   const data = await response.data;
   return { data };
 };
