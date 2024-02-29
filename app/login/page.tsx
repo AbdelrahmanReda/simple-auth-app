@@ -32,7 +32,6 @@ const Page = () => {
     },
     onSuccess: () => {
       toast.success("Logged in successfully");
-      window.location.href = "/posts";
     },
     onError: (error) => {
       console.log(error);
