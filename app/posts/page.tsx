@@ -4,15 +4,17 @@ import Link from "next/link";
 import { columns, DataTable } from "@/components/data-table";
 import { cookies } from "next/headers";
 
-const fetchPosts = async () => {
+const fetchPosts = async ({ page = 1, perPage = 10 }) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
-      headers: {
-        "Content-Type": "application/json",
-        cookie: `connect.sid=${cookies().get("connect.sid")?.value}`,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/posts?page=${page}&pageSize=${perPage}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
       },
-      credentials: "include",
-    });
+    );
     return {
       data: await response.json(),
     };
@@ -32,8 +34,9 @@ interface Post {
   content: string;
 }
 
-const Page = async () => {
-  const { data } = await fetchPosts();
+const Page = async ({ searchParams }: { searchParams: any }) => {
+  const { page } = searchParams;
+  const { data } = await fetchPosts({ page: page, perPage: 3 });
 
   return (
     <div className="m-5">
