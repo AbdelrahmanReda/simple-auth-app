@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import FRow from "@/components/FRow";
 import FSpinner from "@/components/FSpinner";
 import { toast } from "react-toastify";
@@ -18,7 +17,7 @@ const Page = () => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
