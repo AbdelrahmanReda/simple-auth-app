@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import FRow from "@/components/FRow";
 import FSpinner from "@/components/FSpinner";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -17,17 +18,16 @@ const Page = () => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/login`,
+        {
           username: email,
           password,
-        }),
-        credentials: "include",
-      });
+        },
+        {
+          withCredentials: true,
+        },
+      );
     },
     onSuccess: () => {
       toast.success("Logged in successfully");
