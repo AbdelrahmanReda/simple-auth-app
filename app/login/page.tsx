@@ -29,8 +29,9 @@ const Page = () => {
         credentials: "include",
       });
     },
-    onSuccess: () => {
+    onSuccess: (e) => {
       toast.success("Logged in successfully");
+      console.log(e);
     },
     onError: (error) => {
       console.log(error);
