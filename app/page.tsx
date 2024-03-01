@@ -18,7 +18,7 @@ const Page = () => {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      axios.post(
+      await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/login`,
         {
           username: email,
