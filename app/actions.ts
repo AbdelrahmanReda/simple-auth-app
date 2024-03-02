@@ -20,5 +20,39 @@ export async function fetchCookie() {
     httpOnly: true,
     path: "/",
   });
-  console.log(response.headers.get("set-cookie"));
+  response.headers.getSetCookie().forEach((cookie) => {
+    const [name, value] = cookie.split("=");
+    cookies().set({
+      name,
+      value,
+      httpOnly: true,
+      path: "/",
+    });
+  });
+
+  console.log(response.headers.getSetCookie());
+}
+
+export async function login(email: string, password: string) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: email, password }),
+    credentials: "include",
+  });
+  console.log(response.headers);
+  console.log(response.status);
+  console.log(response.headers.getSetCookie());
+  response.headers.getSetCookie().forEach((cookie) => {
+    const [name, value] = cookie.split("=");
+    cookies().set({
+      name,
+      value,
+      httpOnly: true,
+      path: "/",
+      domain: "next-auth-app-six-delta.vercel.app",
+    });
+  });
 }

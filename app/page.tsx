@@ -10,7 +10,7 @@ import FRow from "@/components/FRow";
 import FSpinner from "@/components/FSpinner";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { fetchCookie } from "@/app/actions";
+import { fetchCookie, login } from "@/app/actions";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -50,7 +50,7 @@ const Page = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutation.mutate();
+    await login(email, password);
   };
 
   return (
