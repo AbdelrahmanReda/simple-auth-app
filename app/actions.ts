@@ -14,4 +14,11 @@ export async function fetchCookie() {
       credentials: "include",
     },
   );
+  cookies().set({
+    name: "name",
+    value: "lee",
+    httpOnly: true,
+    path: "/",
+  });
+  console.log(response.headers.get("set-cookie"));
 }
