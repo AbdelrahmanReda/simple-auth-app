@@ -34,14 +34,17 @@ export async function fetchCookie() {
 }
 
 export async function login(email: string, password: string) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: email, password }),
+      credentials: "include",
     },
-    body: JSON.stringify({ username: email, password }),
-    credentials: "include",
-  });
+  );
   console.log(response.headers);
   console.log(response.status);
   console.log(response.headers.getSetCookie());
