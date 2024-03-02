@@ -37,6 +37,16 @@ const Page = () => {
     },
   });
 
+  const handleCookieTest = async () => {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/cookie-test/`,
+      {
+        withCredentials: true,
+      },
+    );
+    console.log(response.data);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutation.mutate();
@@ -72,6 +82,8 @@ const Page = () => {
         {mutation.isError && (
           <div className="text-red-500 text-sm">{mutation.error.message}</div>
         )}
+
+        <Button>Test</Button>
         <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
           <Button variant={"secondary"} className="w-full">
             <img
