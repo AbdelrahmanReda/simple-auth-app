@@ -38,7 +38,7 @@ const Page = () => {
   });
 
   const handleCookieTest = async () => {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/cookie-test/`,
       {
         withCredentials: true,
