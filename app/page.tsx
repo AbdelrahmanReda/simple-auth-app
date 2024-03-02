@@ -88,6 +88,7 @@ const Page = () => {
           type={"button"}
           onClick={async () => {
             await fetchCookie();
+            await handleCookieTest();
           }}
         >
           Test Server Cookie
