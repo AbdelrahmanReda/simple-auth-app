@@ -10,6 +10,7 @@ import FRow from "@/components/FRow";
 import FSpinner from "@/components/FSpinner";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { fetchCookie } from "@/app/actions";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -83,8 +84,13 @@ const Page = () => {
           <div className="text-red-500 text-sm">{mutation.error.message}</div>
         )}
 
-        <Button type={"button"} onClick={handleCookieTest}>
-          Test
+        <Button
+          type={"button"}
+          onClick={async () => {
+            await fetchCookie();
+          }}
+        >
+          Test Server Cookie
         </Button>
         <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
           <Button variant={"secondary"} className="w-full">
