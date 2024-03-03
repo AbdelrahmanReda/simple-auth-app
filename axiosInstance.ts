@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+const cookieStore = cookies();
 const axiosInstance: AxiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",

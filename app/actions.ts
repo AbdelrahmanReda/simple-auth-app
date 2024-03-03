@@ -7,31 +7,6 @@ export async function removeCookie() {
   cookies().delete("myCustomCookie");
 }
 
-export async function fetchCookie() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/cookie-alternative`,
-    {
-      method: "POST",
-      credentials: "include",
-    },
-  );
-  cookies().set({
-    name: "name",
-    value: "lee",
-    httpOnly: true,
-    path: "/",
-  });
-  response.headers.getSetCookie().forEach((cookie) => {
-    const [name, value] = cookie.split("=");
-    cookies().set({
-      name,
-      value,
-      httpOnly: true,
-      path: "/",
-    });
-  });
-}
-
 export async function login(email: string, password: string, hostName: string) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,

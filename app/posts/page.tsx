@@ -1,16 +1,17 @@
-import axiosInstance from "@/axiosInstance";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { columns, DataTable } from "@/components/data-table";
+import axios from "axios";
 import { cookies } from "next/headers";
 
 const fetchPosts = async ({ page = 1, perPage = 10 }) => {
   try {
-    const response = await axiosInstance.get(
+    const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/posts?page=${page}&pageSize=${perPage}`,
       {
         headers: {
           "Content-Type": "application/json",
+          cookie: `connect.sid=${cookies().get("connect.sid")?.value}`,
         },
       },
     );

@@ -10,7 +10,7 @@ import FRow from "@/components/FRow";
 import FSpinner from "@/components/FSpinner";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { fetchCookie, login } from "@/app/actions";
+import { login } from "@/app/actions";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -87,7 +87,6 @@ const Page = () => {
         <Button
           type={"button"}
           onClick={async () => {
-            await fetchCookie();
             await handleCookieTest();
           }}
         >
