@@ -11,6 +11,7 @@ const fetchPosts = async ({ page = 1, perPage = 10 }) => {
       {
         headers: {
           "Content-Type": "application/json",
+          cookie: `connect.sid=${cookies().get("connect.sid")?.value}`,
         },
         credentials: "include",
       },
@@ -46,6 +47,7 @@ const Page = async ({ searchParams }: { searchParams: any }) => {
           <Button>Create Post</Button>
         </Link>
       </div>
+      {JSON.stringify(data)}
       <div className={"mt-3"}>
         <DataTable columns={columns} data={data.posts} />
       </div>

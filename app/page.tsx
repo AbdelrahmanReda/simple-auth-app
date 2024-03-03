@@ -50,7 +50,7 @@ const Page = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await login(email, password);
+    await login(email, password, window.location.hostname);
   };
 
   return (

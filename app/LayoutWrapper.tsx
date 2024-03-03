@@ -24,7 +24,7 @@ export default function LayoutWrapper({
   };
 
   if (cookieValue) {
-    data.user = JSON.parse(decodeURIComponent(cookieValue || ""));
+    data.user = JSON.parse(decodeURIComponent(cookieValue || "") || "");
   }
 
   if (!cookieValue) {
