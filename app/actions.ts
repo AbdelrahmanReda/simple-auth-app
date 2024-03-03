@@ -29,8 +29,6 @@ export async function fetchCookie() {
       path: "/",
     });
   });
-
-  console.log(response.headers.getSetCookie());
 }
 
 export async function login(email: string, password: string, hostName: string) {
@@ -62,7 +60,6 @@ export async function login(email: string, password: string, hostName: string) {
     extractedCookies[key] = value;
   });
 
-  console.log(extractedCookies);
   // Access specific information like id, email, etc.
   const myCustomCookie = extractedCookies["myCustomCookie"];
   const testCookieValue = extractedCookies["testCookie"];
