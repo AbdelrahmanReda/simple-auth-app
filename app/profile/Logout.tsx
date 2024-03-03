@@ -15,14 +15,13 @@ const Logout = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/logout/`, {
         headers: {
-          "Content-Type": "application/json",
           cookie: `connect.sid=${cookies.get("connect.sid")}`,
         },
         withCredentials: true,
       })
       .then(() => {
         removeCookie();
-        router.push("/login");
+        router.push("/");
       });
   };
   return (

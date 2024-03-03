@@ -6,18 +6,17 @@ import { cookies } from "next/headers";
 
 const fetchPosts = async ({ page = 1, perPage = 10 }) => {
   try {
-    const response = await fetch(
+    const response = await axiosInstance.get(
       `${process.env.NEXT_PUBLIC_API_URL}/posts?page=${page}&pageSize=${perPage}`,
       {
         headers: {
           "Content-Type": "application/json",
-          cookie: `connect.sid=${cookies().get("connect.sid")?.value}`,
         },
-        credentials: "include",
       },
     );
+    console.log(response.data);
     return {
-      data: await response.json(),
+      data: response.data,
     };
   } catch (error) {
     return {

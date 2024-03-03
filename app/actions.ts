@@ -1,5 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function removeCookie() {
   cookies().delete("connect.sid");
@@ -90,7 +91,7 @@ export async function login(email: string, password: string, hostName: string) {
     httpOnly: true,
     path: "/",
   });
-
+  redirect("/posts");
   /* response.headers.getSetCookie().forEach((cookie) => {
     const [name, value] = cookie.split("=");
     cookies().set({
