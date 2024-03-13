@@ -67,7 +67,7 @@ const Page = () => {
         <Button type="submit" className="w-full">
           <FRow>
             <FSpinner isVisible={mutation.isPending} />
-            Sign in
+            Sign in ***
           </FRow>
         </Button>
         {mutation.isError && (

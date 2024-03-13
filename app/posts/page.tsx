@@ -3,6 +3,7 @@ import Link from "next/link";
 import { columns, DataTable } from "@/components/data-table";
 import axios from "axios";
 import { cookies } from "next/headers";
+import FRow from "@/components/FRow";
 
 const fetchPosts = async ({ page = 1, perPage = 10 }) => {
   try {
@@ -47,9 +48,18 @@ const Page = async ({ searchParams }: { searchParams: any }) => {
           <Button>Create Post</Button>
         </Link>
       </div>
-      {JSON.stringify(data)}
+
       <div className={"mt-3"}>
         <DataTable columns={columns} data={data.posts} />
+        <FRow className={"mt-3"}>
+          {parseInt(page) - 1}
+          <Link href={`/posts?page=${parseInt(page) + 1}`}>
+            <Button>Next </Button>
+          </Link>
+          <Link href={`/posts?page=${parseInt(page) - 1}`}>
+            <Button>Previous </Button>
+          </Link>
+        </FRow>
       </div>
     </div>
   );

@@ -50,7 +50,20 @@ const Page = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await login(email, password, window.location.hostname);
+    // await login(email, password, window.location.hostname);
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: email, password }),
+        credentials: "include",
+      },
+    );
+    console.log("response", response.headers);
   };
 
   return (
@@ -77,7 +90,7 @@ const Page = () => {
         <Button type="submit" className="w-full">
           <FRow>
             <FSpinner isVisible={mutation.isPending} />
-            Sign in
+            Sign in ****
           </FRow>
         </Button>
         {mutation.isError && (
