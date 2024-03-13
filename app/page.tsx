@@ -53,13 +53,12 @@ const Page = () => {
     // await login(email, password, window.location.hostname);
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
+      `${process.env.NEXT_PUBLIC_API_URL}/set-cookie-test`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username: email, password }),
         credentials: "include",
       },
     );
