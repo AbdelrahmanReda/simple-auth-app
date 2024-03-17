@@ -32,7 +32,6 @@ function CreatePostForm() {
           content: data.content,
         },
         {
-          withCredentials: true,
           headers: {
             cookie: `connect.sid=${cookies.get("connect.sid")}`,
           },
