@@ -56,13 +56,17 @@ const Page = () => {
       `${process.env.NEXT_PUBLIC_API_URL}/auth/login/`,
       {
         method: "POST",
+        body: JSON.stringify({
+          username: email,
+          password,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
       },
     );
-    console.log("response", response.headers);
+    console.log("response is ", response.headers);
   };
 
   return (
