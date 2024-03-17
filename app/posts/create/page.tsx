@@ -33,6 +33,7 @@ function CreatePostForm() {
         },
         {
           headers: {
+            "Content-Type": "application/json",
             cookie: `connect.sid=${cookies.get("connect.sid")}`,
           },
         },
