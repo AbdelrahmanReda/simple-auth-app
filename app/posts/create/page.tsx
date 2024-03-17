@@ -13,6 +13,7 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import FSpinner from "@/components/FSpinner";
 import FRow from "@/components/FRow";
 import { cookies } from "next/headers";
+import { useCookies } from "next-client-cookies";
 
 type Post = {
   title: string;
@@ -20,6 +21,8 @@ type Post = {
 };
 
 function CreatePostForm() {
+  const cookies = useCookies();
+
   const mutation = useMutation({
     mutationFn: async (data: { title: string; content: string }) => {
       const response = await axios.post(
@@ -31,7 +34,7 @@ function CreatePostForm() {
         {
           withCredentials: true,
           headers: {
-            cookie: `connect.sid=${cookies().get("connect.sid")?.value}`,
+            cookie: `connect.sid=${cookies.get("connect.sid")}`,
           },
         },
       );
