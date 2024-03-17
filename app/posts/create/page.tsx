@@ -12,6 +12,7 @@ import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import FSpinner from "@/components/FSpinner";
 import FRow from "@/components/FRow";
+import { cookies } from "next/headers";
 
 type Post = {
   title: string;
@@ -29,6 +30,9 @@ function CreatePostForm() {
         },
         {
           withCredentials: true,
+          headers: {
+            cookie: `connect.sid=${cookies().get("connect.sid")?.value}`,
+          },
         },
       );
       return response.data;
